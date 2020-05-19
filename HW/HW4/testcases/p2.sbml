@@ -1,0 +1,10 @@
+{
+  x = 13;
+  print(x);
+  y = "Goodnight";
+  print(y);
+  z = x + y;
+  print(z);
+  w = 47 + "Moon";
+  print(w);
+}

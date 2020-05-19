@@ -1,0 +1,10 @@
+{
+  if(2 < 10)
+  {
+    print("Yea");
+  }
+  else
+  {
+    print("Nay");
+  }
+}

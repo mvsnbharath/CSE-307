@@ -1,0 +1,24 @@
+/* Venkata Subba Narasa Bharath Meadam*/ 
+/* SBU ID: 112672986*/ 
+
+/* Initial State*/ 
+state(j, c, h, l, up, i).
+
+/* Move to Lever*/ 
+state(L, C, H, L, up, walk(X,L,S)):-  state(X, C, H, L, up, S), X\=L .
+
+/* Pull the Lever*/ 
+state(L, C, H, L, down, pull(S)):-  state(L, C, H, L, up, S) .
+
+/* Walk to crate from lever*/ 
+state(c, c, H, L, down, walk(L,c,S)):-  state(L, c, H, L, down, S),L\=c.
+
+/* Push Crate to hole*/ 
+state(C, H, H, L, down, push(c,h,S)):-  state(C, c, H, L, down, S).
+
+/*Walk from Crate to hole*/ 
+/* Whiplash and  Climb */ 
+state(H, H, H, L, down, whiplash(climb(walk(c,H,S)))):-  state(c, H, H, L, down, S).
+
+/* Walk from Crate to hole*/ 
+escape(X):- state(h, h, h, l, down, X).

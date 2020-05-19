@@ -1,0 +1,4 @@
+{
+  x = "Goodnight";
+  print(x);
+}

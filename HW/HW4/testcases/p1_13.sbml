@@ -1,0 +1,6 @@
+{
+  x = "Goodnight";
+  y = 'Moon';
+  z = x + y;
+  print(z);
+}

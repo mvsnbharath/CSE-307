@@ -1,0 +1,15 @@
+{
+  inlist = [111, 23, 934, 86, 2, 65, 786, 933];
+  len = 7;
+  max = 0;
+  i = 0;
+  while(i < len)
+  {
+    if(inlist[i] > max)
+    {
+      max = inlist[i];
+    }
+    i = i + 1;
+  }
+  print(max);
+}

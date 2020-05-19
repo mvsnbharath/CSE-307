@@ -1,0 +1,9 @@
+{
+  x = [3, 5.0, "eight", 'xiii'];
+  i = 0;
+  while(i < 4)
+  {
+    print(x[i]);
+    i = i + 1;
+  }
+}

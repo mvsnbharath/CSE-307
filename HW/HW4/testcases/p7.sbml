@@ -1,0 +1,12 @@
+{
+  instr = ".sdrawrof si gnirts sihT";
+  len = 24;
+  i = 0;
+  outstr = "";
+  while(i < len)
+  {
+    outstr = instr[i] + outstr;
+    i = i + 1;
+  }
+  print(outstr);
+}
