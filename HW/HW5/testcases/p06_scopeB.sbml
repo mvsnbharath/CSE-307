@@ -1,0 +1,11 @@
+fun hrunk(x) = 
+{
+  output = x + 10;
+}
+output;
+{
+  x = 10;
+  y = hrunk(x);
+  print("Should print 20");
+  print(y);
+}

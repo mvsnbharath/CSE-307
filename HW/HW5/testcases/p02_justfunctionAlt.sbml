@@ -1,0 +1,9 @@
+fun f(n) = 
+{
+  output = "Yes";
+  print("Printed inside function f().");
+}
+output;
+{
+  x = f(0);
+}

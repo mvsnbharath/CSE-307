@@ -1,0 +1,9 @@
+fun f() = 
+{
+  output = "Yes";
+  print("Printed inside function f().");
+}
+output;
+{
+  x = f();
+}

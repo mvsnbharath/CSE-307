@@ -1,0 +1,3 @@
+{
+  print("This program has no function definitions.");
+}
