@@ -10,7 +10,7 @@ tokenizeDebug = 0
 tokenizeInput = 0
 rulesDebug = 0
 parseDebug = 0
-stackTrace = 0
+stackTrace = 1
 
 
 # AST Nodes
@@ -469,6 +469,16 @@ class FunctionDefinition(Node):
         myGlobalStack.popElementFromStack()
         return x
 
+    def evaluateFunctionWithoutArgs(self):
+        # Check args count
+        stackFrame = {self.functionName: self}
+        myGlobalStack.pushElementToStack(stackFrame)
+        self.funcBlock.eval()
+        x = self.returnValue.eval()
+        # popout stackFrame
+        myGlobalStack.popElementFromStack()
+        return x
+
 
 # Calling Of Function
 class CallFunction(Node):
@@ -478,7 +488,10 @@ class CallFunction(Node):
         self.funcArgs = funcArgs
 
     def eval(self):
-        return myGlobalStack.getElementByNameFromStack(0)[self.functionName.value].evaluateFunction(self.funcArgs.value)
+        if self.funcArgs is None:
+            return myGlobalStack.getElementByNameFromStack(0)[self.functionName.value].evaluateFunctionWithoutArgs()
+        else:
+            return myGlobalStack.getElementByNameFromStack(0)[self.functionName.value].evaluateFunction(self.funcArgs.value)
 
 
 class ProgramNode(Node):
@@ -656,8 +669,14 @@ def p_functions_2(p):
 
 
 def p_function(p):
-    """ function : FUN VARIABLE LEFT_PARENTHESIS func_args RIGHT_PARENTHESIS ASSIGNMENT block VARIABLE SEMICOLON """
+    """ function : FUN VARIABLE LEFT_PARENTHESIS func_args RIGHT_PARENTHESIS ASSIGNMENT block expr SEMICOLON """
     p[0] = FunctionDefinition(p[2], p[4], p[7], p[8])
+
+
+#function without args
+def p_function_2(p):
+    """ function : FUN VARIABLE LEFT_PARENTHESIS RIGHT_PARENTHESIS ASSIGNMENT block expr SEMICOLON """
+    p[0] = FunctionDefinition(p[2], None, p[6], p[7])
 
 
 def p_func_args_1(p):
@@ -674,6 +693,10 @@ def p_func_args_2(p):
 def p_expr_func(p):
     """ expr : VARIABLE LEFT_PARENTHESIS func_args RIGHT_PARENTHESIS"""
     p[0] = CallFunction(p[1], p[3])
+
+def p_expr_func_2(p):
+    """ expr : VARIABLE LEFT_PARENTHESIS  RIGHT_PARENTHESIS"""
+    p[0] = CallFunction(p[1], None)
 
 
 def p_block_1(p):
